@@ -28,10 +28,9 @@
                 result: '',
             },
             methods: {
-                onSubmitForm(e) {
+                onSubmitForm(e) { // 원페이지 뷰는 새로고침 되는걸 막아야 하기 때문에 이 코드를 넣는다.
                     e.preventDefault();
                     // cosole.log가 찍히지가 않는데 정확한 이유를 모르겠다. 추후에 알아보기로 하고 일단 넘어감.
-                    console.log(this);
                     console.log(this.el1, this.el2, this.value);
 
                     if (this.el1 * this.el2 === this.value) {

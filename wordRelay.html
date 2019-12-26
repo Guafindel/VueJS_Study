@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>끝말잇기</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{word}}</div>
+        <form v-on:submit="onSubmitForm">
+            <input ref="answer" v-model="value" type="text" />
+            <button type="submit">입력</button>
+        </form>
+        <div>{{result}}</div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    word: '제로초',
+                    result: '',
+                    value: '',
+                }
+            },
+            methods: {
+                onSubmitForm(e) {
+                    e.preventDefault();
+                    if (this.word[this.word.length - 1] === this.value[0]) {
+                        this.result = '정답';
+                        this.word = this.value;
+                        this.value = '';
+                        // $refs가 없어도 포커스가 자동으로 인풋태그로 들어가는데 이유는 정확히 모르겠네.
+                        this.$refs.answer.focus();
+
+                    } else {
+                        this.result = '오답';
+                        this.value = '';
+                        this.$rsfs.answer.focus();
+                    }
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

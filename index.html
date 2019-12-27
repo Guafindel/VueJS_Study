@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{ el1 }} 곱하기 {{ el2 }} 는 ?</span>
+        <form v-on:submit="onSubmitForm">
+            <input v-model.number="value" type="number" ref="answer" step="1" />
+            <button type="submit">입력</button>
+        </form>
+        <span>{{ result }}</span>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                el1: Math.ceil(Math.random() * 9),
+                el2: Math.ceil(Math.random() * 9),
+                value: '',
+                result: '',
+            },
+            methods: {
+                onSubmitForm(e) {
+                    e.preventDefault();
+                    // cosole.log가 찍히지가 않는데 정확한 이유를 모르겠다. 추후에 알아보기로 하고 일단 넘어감.
+                    console.log(this);
+                    console.log(this.el1, this.el2, this.value);
+
+                    if (this.el1 * this.el2 === this.value) {
+                        this.result = '정답';
+                        this.el1 = Math.ceil(Math.random() * 9);
+                        this.el2 = Math.ceil(Math.random() * 9);
+                        this.value = '';
+                        this.$rsfs.answer.focus();
+                    } else {
+                        this.result = '오답';
+                        this.$rsfs.answer.focus();
+                    }
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

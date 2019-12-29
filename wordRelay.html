@@ -11,26 +11,28 @@
 
 <body>
     <div id="app">
-        <word-relay></word-relay>
-        <word-relay></word-relay>
-        <word-relay></word-relay>
+        <word-relay start-Word="소종원"></word-relay>
+        <word-relay start-Word="Joshua"></word-relay>
+        <word-relay start-Word="SoJongWon"></word-relay>
     </div>
 
     <script>
-        Vue.component('word-relay', {
+        Vue.component('wordRelay', { // 전역 컴포넌트
             template: `
             <div>
                 <div>{{word}}</div>
-                  <form v-on:submit="onSubmitForm">
+                <form v-on:submit="onSubmitForm">
                     <input ref="answer" v-model="value" type="text">
                     <button type="submit">입력</button>
-                  </form>
+                </form>
                 <div>{{result}}</div>
             </div>
             `,
+            props: ['startWord'],
             data() {
+                console.log(this);
                 return {
-                    word: '제로초',
+                    word: this.startWord,
                     result: '',
                     value: '',
                 };
@@ -55,7 +57,7 @@
     </script>
 
     <script>
-        var app = new Vue({
+        const app = new Vue({
             el: '#app',
         });
     </script>
